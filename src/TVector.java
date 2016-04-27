@@ -1,10 +1,12 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 
-public class TVector {
+public class TVector extends TBaseMethods<TVector> {
 	private double[] fArray;
+	private static final double EPSILON = 10e-9;
 
 	public TVector(){
 	}
@@ -72,6 +74,7 @@ public class TVector {
 		return fArray.length;
 	}
 
+
 	public void setDimension(int dimension) {
 		if(fArray.length != dimension){
 			fArray = new double[dimension];
@@ -83,14 +86,20 @@ public class TVector {
 		return fArray[index];
 	}
 
+
 	public void setElement(int index, double x) {
 		fArray[index] = x;
 	}
 
 
-	//y += x; のように単項演算子として定義
-	public TVector add(TVector x) {
-		//assert x.fArray.length == fArray.length;
+	/**
+	 * 自分自身に引数のベクトルを足し，自分自身を返す<br>
+	 * 演算子オーバーロードができないため，y += x; のように単項演算子として定義
+	 * @param x
+	 * @return
+	 */
+	public TVector add(TVector x)  {
+		assert x.fArray.length == fArray.length;
 		for (int i = 0; i < fArray.length; i++) {
 			fArray[i] += x.fArray[i];
 		}
@@ -98,39 +107,98 @@ public class TVector {
 	}
 
 
+	/**
+	 * 自分自身から引数のベクトルを引き，自分自身を返す<br>
+	 * y -= x;
+	 * @param x
+	 * @return
+	 */
 	public TVector substract(TVector x) {
-
+		assert x.fArray.length == fArray.length;
+		for (int i = 0; i < fArray.length; i++) {
+			fArray[i] -= x.fArray[i];
+		}
+		return this;
 	}
 
 
-	public TVector innerProduct(TVector x) {
-
+	/**
+	 * 引数のベクトルとの内積を返す
+	 * @param x
+	 * @return
+	 */
+	public double innerProduct(TVector x) {
+		assert x.fArray.length == fArray.length;
+		double innerProductValue = 0;
+		for (int i = 0; i < fArray.length; i++) {
+			innerProductValue += fArray[i] * x.fArray[i];
+		}
+		return innerProductValue;
 	}
 
 
+	/**
+	 * 各要素にaをかけて，自分自身を返す
+	 * @param a
+	 * @return
+	 */
 	public TVector scalarProduct(double a) {
-
+//		for (int i = 0; i < fArray.length; i++) {
+//			fArray[i] *= a;
+//		}
+		Arrays.stream(fArray).forEach(elem ->  elem *= a);
+		return this;
 	}
 
 
+
+	/**
+	 * L2ノルム(ユークリッド距離)を返す
+	 * @return
+	 */
 	public double getL2Norm() {
-
+		double L2Norm = 0;
+		for (double d : fArray) {
+			L2Norm += d*d;
+		}
+		return Math.sqrt(L2Norm);
 	}
 
 
-	//単位ベクトル化
+	/**
+	 *  単位ベクトル化し，自分自身を返す
+	 * @return
+	 */
 	public TVector normalize() {
+		double L2Norm = getL2Norm();
+		Arrays.stream(fArray).forEach(t -> t /= L2Norm);
+		return this;
+	}
 
+
+	/**
+	 * 比較対象は次元数と各要素
+	 * @param t
+	 * @return
+	 */
+	@Override
+	public boolean equals(Object t){
+		if(t == null || getClass() != t.getClass())
+			return false;
+
+		TVector tVector = (TVector)t;
+		if(getDimension() != tVector.getDimension())
+			return false;
+		for (int i = 0; i < fArray.length; i++) {
+			if(Math.abs(fArray[i] - tVector.fArray[i]) > EPSILON)
+				return false;
+		}
+		return true;
 	}
 
 
 	@Override
-	public boolean equals(Object t){
-
-	}
-
-
-	public static void  main(String[] args){
-
+	public int hashCode() {
+		return super.hashCode();
 	}
 }
