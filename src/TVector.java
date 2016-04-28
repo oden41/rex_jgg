@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 
 
 public class TVector extends TBaseMethods<TVector> {
@@ -9,6 +8,7 @@ public class TVector extends TBaseMethods<TVector> {
 	private static final double EPSILON = 10e-9;
 
 	public TVector(){
+		fArray = new double[0];
 	}
 
 	public TVector(TVector src){
@@ -50,16 +50,16 @@ public class TVector extends TBaseMethods<TVector> {
 
 	public void writeTo(PrintWriter pw) {
 		pw.println(fArray.length);
-		/*for (int i = 0; i < fArray.length; i++) {
+		for (int i = 0; i < fArray.length; i++) {
 			pw.print(fArray[i] + " ");
-		}*/
-		pw.println(this);
+		}
+		pw.println();
 	}
 
 
 	public void  readFrom(BufferedReader br)  throws IOException {
 		int dimension = Integer.parseInt(br.readLine());
-		String[] strArray = br.readLine().split("");
+		String[] strArray = br.readLine().split(" ");
 		if(fArray.length != dimension){
 			fArray = new double[dimension];
 		}
@@ -143,10 +143,9 @@ public class TVector extends TBaseMethods<TVector> {
 	 * @return
 	 */
 	public TVector scalarProduct(double a) {
-//		for (int i = 0; i < fArray.length; i++) {
-//			fArray[i] *= a;
-//		}
-		Arrays.stream(fArray).forEach(elem ->  elem *= a);
+		for (int i = 0; i < fArray.length; i++) {
+			fArray[i] *= a;
+		}
 		return this;
 	}
 
@@ -171,7 +170,9 @@ public class TVector extends TBaseMethods<TVector> {
 	 */
 	public TVector normalize() {
 		double L2Norm = getL2Norm();
-		Arrays.stream(fArray).forEach(t -> t /= L2Norm);
+		for (int i = 0; i < fArray.length; i++) {
+			fArray[i] /= L2Norm;
+		}
 		return this;
 	}
 
@@ -199,6 +200,29 @@ public class TVector extends TBaseMethods<TVector> {
 
 	@Override
 	public int hashCode() {
-		return super.hashCode();
+		return fArray.hashCode();
 	}
+
+
+//	public static void main(String[] args) throws IOException{
+////		File file = new File("VectorTest.txt");
+////		BufferedReader br = new BufferedReader(new FileReader(file));
+//
+//		TVector vector = new TVector();
+//		vector.setDimension(3);
+//		for (int i = 0; i < vector.getDimension(); i++) {
+//			vector.setElement(i, i+1);
+//		}
+//
+//		TVector vector2 =vector.clone();
+//		vector.setElement(1, 5);
+//		System.out.println(vector);
+//		System.out.println(vector2);
+//
+//		for (int i = 0; i < 100; i++) {
+//			vector.add(vector2);
+//		}
+//		System.out.println(vector);
+//	}
+
 }

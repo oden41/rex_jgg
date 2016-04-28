@@ -14,21 +14,15 @@ public abstract class TBaseMethods<T> {
 	public abstract T clone();
 
 	@Override
-	public String toString(){
-		throw new UnsupportedOperationException();
-	}
+	public abstract String toString();
 
 	public abstract void readFrom(BufferedReader br) throws IOException;
 
 	public abstract void writeTo(PrintWriter pw);
 
 	@Override
-	public boolean equals(Object t){
-		throw new UnsupportedOperationException();
-	}
+	public abstract boolean equals(Object t);
 
 	@Override
-	public int hashCode(){
-		throw new UnsupportedOperationException();
-	}
+	public abstract int hashCode();
 }
