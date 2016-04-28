@@ -4,9 +4,10 @@ import java.io.PrintWriter;
 
 
 
-public class TIndividual {
+public class TIndividual extends TBaseMethods<TIndividual> {
 	private TVector fVector;
 	private double fEvalationValue;
+	private static final double EPSILON = 10e-9;
 
 	public TIndividual(){
 		fVector = new TVector();
@@ -25,6 +26,7 @@ public class TIndividual {
 		return new TIndividual(this);
 	}
 
+
 	public TIndividual copyFrom(TIndividual src) {
 		fVector.copyFrom(src.fVector);
 		fEvalationValue = src.fEvalationValue;
@@ -41,12 +43,25 @@ public class TIndividual {
 
 
 	public void readFrom(BufferedReader br) throws IOException {
-
+		fVector.readFrom(br);
+		fEvalationValue = Double.parseDouble(br.readLine());
 	}
 
 
-	public void writeTo(PrintWriter pw) {
 
+	/**
+	 * 書式は<br>
+	 * <br>
+	 * TVectorの情報<br>
+	 * 評価値<br>
+	 * <br>
+	 * となっている
+	 * @see TBaseMethods#writeTo(java.io.PrintWriter)
+	 */
+	public void writeTo(PrintWriter pw) {
+		fVector.writeTo(pw);
+		pw.println(fEvalationValue);
+		pw.println(this);
 	}
 
 
@@ -66,7 +81,40 @@ public class TIndividual {
 
 
 	@Override
-	public boolean equals(Object x){
-		return false;
+	public boolean equals(Object t){
+		if(t == null || getClass() != t.getClass())
+			return false;
+
+		TIndividual tVector = (TIndividual)t;
+		if(Math.abs(getEvaluationValue() - tVector.getEvaluationValue()) > EPSILON)
+			return false;
+
+		return tVector.getVector().equals(fVector);
 	}
+
+
+	@Override
+	public int hashCode() {
+		return fVector.hashCode() * (int)fEvalationValue;
+	}
+
+
+//	public static void main(String[] args) throws IOException{
+//		File file = new File("TIndividualTest.txt");
+//		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(file)));
+//		//BufferedReader br = new BufferedReader(new FileReader(file));
+//
+//		TIndividual individual = new TIndividual();
+//		individual.setEvaluationValue(100.0);
+//		individual.getVector().setDimension(3);
+//		for (int i = 0; i < individual.getVector().getDimension(); i++) {
+//			individual.getVector().setElement(i, i+1);
+//		}
+//
+//		individual.writeTo(pw);
+//
+//		//br.close();
+//		pw.close();
+//
+//	}
 }
