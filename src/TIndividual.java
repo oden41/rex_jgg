@@ -37,7 +37,7 @@ public class TIndividual extends TBaseMethods<TIndividual> {
 	@Override
 	public String toString() {
 		String str = fEvalationValue + "\n";
-		str += fVector;
+		str += fVector + "\n";
 		return str;
 	}
 
@@ -61,7 +61,6 @@ public class TIndividual extends TBaseMethods<TIndividual> {
 	public void writeTo(PrintWriter pw) {
 		fVector.writeTo(pw);
 		pw.println(fEvalationValue);
-		pw.println(this);
 	}
 
 
