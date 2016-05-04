@@ -1,6 +1,5 @@
 
 public class TSphereFunction {
-
 	private int fDimension;
 
 

@@ -1,9 +1,10 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Arrays;
 
 
-public class TPopulation extends TBaseMethods<TPopulation> {
+public class TPopulation{
 	private TIndividual[] fArray;
 
 
@@ -20,7 +21,6 @@ public class TPopulation extends TBaseMethods<TPopulation> {
 	}
 
 
-	@Override
 	public TPopulation copyFrom(TPopulation src) {
 		if(getNumberOfPopulation() != src.getNumberOfPopulation())
 			setnumberOfPopulation(src.getNumberOfPopulation());
@@ -48,7 +48,6 @@ public class TPopulation extends TBaseMethods<TPopulation> {
 	}
 
 
-	@Override
 	public void readFrom(BufferedReader br) throws IOException {
 		int numOfPopulation = Integer.parseInt(br.readLine());
 		setnumberOfPopulation(numOfPopulation);
@@ -69,7 +68,6 @@ public class TPopulation extends TBaseMethods<TPopulation> {
 	 *
 	 * @see TBaseMethods#writeTo(java.io.PrintWriter)
 	 */
-	@Override
 	public void writeTo(PrintWriter pw) {
 		pw.println(getNumberOfPopulation());
 		for (TIndividual tIndividual : fArray) {
@@ -120,6 +118,12 @@ public class TPopulation extends TBaseMethods<TPopulation> {
 
 	public TIndividual getIndividual(int index) {
 		return fArray[index];
+	}
+
+
+	public double getBestEvaluationValue(){
+		Arrays.sort(fArray, (a,b) -> a.getEvaluationValue() > b.getEvaluationValue() ? 1 : (a.getEvaluationValue() < b.getEvaluationValue()) ? -1 : 0);
+		return fArray[0].getEvaluationValue();
 	}
 
 

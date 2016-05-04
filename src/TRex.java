@@ -1,7 +1,6 @@
 import java.util.Random;
 
 public class TRex {
-
 	private Random fRandom;
 
 	public TRex(Random rand) {
@@ -24,17 +23,17 @@ public class TRex {
 		for (int i = 0; i < parents.length; i++) {
 			gVector.add(parents[i].getVector());
 		}
-		gVector.scalarProduct((double)1/parents.length);
+		gVector.scalarProduct(1/(double)parents.length);
 
 		for (int i = 0; i < children.length; i++) {
 			//第2項のベクトルを計算
 			TVector term2Vector = new TVector();
 			term2Vector.setDimension(dimension);
 			for (int j = 0; j < parents.length; j++) {
-				TVector subVector = new TVector(parents[j].getVector());
+				TVector subVector = parents[j].getVector().clone();
 				subVector.substract(gVector);
-				//TODO εの計算
-				double eps = normalDist(fRandom.nextDouble(),parents.length);
+				//TODO εの計算 現在は定義域を[-5,5]に固定されている
+				double eps = uniformDist(fRandom.nextDouble() * 10 - 5,parents.length);
 				subVector.scalarProduct(eps);
 				term2Vector.add(subVector);
 			}
@@ -51,7 +50,7 @@ public class TRex {
 	 * @return
 	 */
 	private double normalDist(double x, int noOfParents) {
-		return Math.sqrt((noOfParents - 1)/(2 * Math.PI)) * Math.exp(- x * x * (noOfParents - 1)/2);
+		return fRandom.nextGaussian() / (noOfParents - 1);
 	}
 
 
@@ -62,7 +61,12 @@ public class TRex {
 	 * @return
 	 */
 	private double uniformDist(double x, int noOfParents) {
-		return ((double)(noOfParents - 1)) / 12;
+		double threshold = Math.sqrt(12 / (double)(noOfParents - 1)) / 2;
+//		if(Math.abs(x) <= threshold)
+//			return 1 / (threshold * 2);
+//		else
+//			return 0;
+		return fRandom.nextDouble() * threshold * 2 - threshold;
 	}
 
 

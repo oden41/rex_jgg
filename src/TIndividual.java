@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 
 
 
-public class TIndividual extends TBaseMethods<TIndividual> {
+public class TIndividual{
 	private TVector fVector;
 	private double fEvalationValue;
 	private static final double EPSILON = 10e-9;

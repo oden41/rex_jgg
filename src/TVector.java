@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 
-public class TVector extends TBaseMethods<TVector> {
+public class TVector{
 	private double[] fArray;
 	private static final double EPSILON = 10e-9;
 
