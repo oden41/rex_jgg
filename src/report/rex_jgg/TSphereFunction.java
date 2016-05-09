@@ -1,3 +1,4 @@
+package report.rex_jgg;
 
 public class TSphereFunction {
 	private int fDimension;

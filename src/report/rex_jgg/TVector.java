@@ -1,3 +1,4 @@
+package report.rex_jgg;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;

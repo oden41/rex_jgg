@@ -1,3 +1,4 @@
+package report.rex_jgg;
 import java.util.Random;
 
 public class TRex {
