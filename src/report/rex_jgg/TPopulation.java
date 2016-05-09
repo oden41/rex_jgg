@@ -26,7 +26,7 @@ public class TPopulation{
 
 	public TPopulation copyFrom(TPopulation src) {
 		if(getNumberOfPopulation() != src.getNumberOfPopulation())
-			setnumberOfPopulation(src.getNumberOfPopulation());
+			setNumOfPopulation(src.getNumberOfPopulation());
 
 		for (int i = 0; i < src.getNumberOfPopulation(); i++) {
 			fArray[i].copyFrom(src.getIndividual(i));
@@ -41,6 +41,10 @@ public class TPopulation{
 	}
 
 
+	/**
+	 * 個体数<br>
+	 * 各個体の情報<br>
+	 */
 	@Override
 	public String toString() {
 		String string = getNumberOfPopulation() + "\n";
@@ -53,7 +57,7 @@ public class TPopulation{
 
 	public void readFrom(BufferedReader br) throws IOException {
 		int numOfPopulation = Integer.parseInt(br.readLine());
-		setnumberOfPopulation(numOfPopulation);
+		setNumOfPopulation(numOfPopulation);
 		for (int i = 0; i < numOfPopulation; i++) {
 			fArray[i] = new TIndividual();
 			fArray[i].readFrom(br);
@@ -111,7 +115,11 @@ public class TPopulation{
 	}
 
 
-	public void setnumberOfPopulation(int num) {
+	/**
+	 * num体の個体集団で初期化する
+	 * @param num
+	 */
+	public void setNumOfPopulation(int num) {
 		fArray = new TIndividual[num];
 		for (int i = 0; i < fArray.length; i++) {
 			fArray[i] = new TIndividual();

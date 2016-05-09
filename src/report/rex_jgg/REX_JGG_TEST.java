@@ -43,7 +43,7 @@ public class REX_JGG_TEST {
 		TSphereFunction function = new TSphereFunction(dimension);
 		TPopulation initialPopulation = new TPopulation();
 		Random random = new Random();
-		initialPopulation.setnumberOfPopulation(populationSize);
+		initialPopulation.setNumOfPopulation(populationSize);
 		for (int i = 0; i < populationSize; i++) {
 			initialPopulation.getIndividual(i).getVector().setDimension(dimension);
 			for (int j = 0; j < dimension; j++) {
