@@ -152,6 +152,20 @@ public class TPopulation {
 		fArray[index2].copyFrom(temp);
 	}
 
+	/**
+	 * 指定した範囲の配列を返すメソッド
+	 *
+	 * @param startIndex
+	 * @param count
+	 * @return
+	 */
+	public TIndividual[] getRange(int startIndex, int count) {
+		TIndividual[] selectedRange = new TIndividual[count];
+		for (int i = startIndex; i < startIndex + count; i++) {
+			selectedRange[i - startIndex] = fArray[i].clone();
+		}
+		return selectedRange;
+	}
 	// public static void main(String[] args) throws IOException {
 	// //File file = new File("TPopulationTest.txt");
 	// //PrintWriter pw = new PrintWriter(new BufferedWriter(new
