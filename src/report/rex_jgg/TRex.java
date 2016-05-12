@@ -21,7 +21,6 @@ public class TRex {
 		// はじめに重心を計算(すべてのベクトルは長さが同じと仮定)
 		TVector gVector = new TVector();
 		gVector.setDimension(dimension);
-		;
 		for (int i = 0; i < parents.length; i++) {
 			gVector.add(parents[i].getVector());
 		}
@@ -33,11 +32,7 @@ public class TRex {
 			term2Vector.setDimension(dimension);
 			for (int j = 0; j < parents.length; j++) {
 				TVector subVector = parents[j].getVector().clone();
-				subVector.substract(gVector);
-				// TODO εの計算
-				double eps = uniformDist(parents.length);
-				subVector.scalarProduct(eps);
-				term2Vector.add(subVector);
+				term2Vector.add(subVector.substract(gVector).scalarProduct(normalDist(parents.length)));
 			}
 			children[i].getVector().copyFrom(gVector.clone().add(term2Vector));
 		}

@@ -8,23 +8,26 @@ public class TJgg {
 	private TPopulation fpopulation;
 	private TRex fRex;
 	private TSphereFunction fFunction;
+	private int fNoOfParents;
+	private int fNoOfKids;
 
-	public TJgg(TSphereFunction function, TPopulation initialPopulation, Random rand) {
+	public TJgg(TSphereFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
 		fRandom = rand;
 		fpopulation = initialPopulation;
 		fFunction = function;
+		fNoOfParents = noOfParents;
+		fNoOfKids = noOfKids;
 
-		fRex = new TRex(rand);
+		fRex = new TRex(fRandom);
 	}
 
 	public void doOneIteration() {
-		// 複製選択 n+1個体ランダムに選択する．
-		int n = fpopulation.getIndividual(0).getVector().getDimension();
+		// 複製選択
 		fpopulation.shuffle();
-		TIndividual[] parents = fpopulation.getRange(0, n + 1);
+		TIndividual[] parents = fpopulation.getRange(0, fNoOfParents);
 
 		// 子個体の生成
-		TIndividual[] children = fRex.makeOffspring(parents, 5 * n);
+		TIndividual[] children = fRex.makeOffspring(parents, fNoOfKids);
 
 		// 子個体の評価
 		for (int i = 0; i < children.length; i++) {

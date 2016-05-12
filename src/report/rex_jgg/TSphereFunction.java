@@ -23,12 +23,7 @@ public class TSphereFunction {
 		if (fDimension != x.getDimension())
 			return Double.MAX_VALUE;
 
-		double eval = 0.0;
-		for (int i = 0; i < fDimension; i++) {
-			double element = x.getElement(i);
-			eval += element * element;
-		}
-		return eval;
+		return x.innerProduct(x);
 	}
 
 	// public static void main(String[] args) {
