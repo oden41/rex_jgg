@@ -147,7 +147,7 @@ public class TPopulation {
 	 * @param index2
 	 */
 	public void swap(int index1, int index2) {
-		TIndividual temp = fArray[index1];
+		TIndividual temp = fArray[index1].clone();
 		fArray[index1].copyFrom(fArray[index2]);
 		fArray[index2].copyFrom(temp);
 	}
