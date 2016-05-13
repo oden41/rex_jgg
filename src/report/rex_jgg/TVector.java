@@ -16,7 +16,6 @@ public class TVector {
 		fArray = new double[src.fArray.length];
 		for (int i = 0; i < fArray.length; i++) {
 			fArray[i] = src.fArray[i];
-
 		}
 	}
 
@@ -27,7 +26,6 @@ public class TVector {
 
 		for (int i = 0; i < fArray.length; i++) {
 			fArray[i] = src.fArray[i];
-
 		}
 		return this;
 	}
