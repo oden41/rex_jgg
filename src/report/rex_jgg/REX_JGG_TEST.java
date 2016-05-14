@@ -39,7 +39,7 @@ public class REX_JGG_TEST {
 		String logFilename = trialName + ".csv"; // ログファイル名
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(logFilename)));
 
-		TSphereFunction function = new TSphereFunction(dimension);
+		IFunction function = new TSphereFunction(dimension);
 		TPopulation initialPopulation = new TPopulation();
 		Random random = new Random();
 		initialPopulation.setPopulationSize(populationSize);
