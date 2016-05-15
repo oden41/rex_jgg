@@ -1,6 +1,6 @@
 package report.rex_jgg;
 
-public class TSphereFunction {
+public class TSphereFunction implements IFunction {
 	private int fDimension;
 
 	public TSphereFunction(int dimension) {

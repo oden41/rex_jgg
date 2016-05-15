@@ -7,11 +7,11 @@ public class TJgg {
 	private Random fRandom;
 	private TPopulation fpopulation;
 	private TRex fRex;
-	private TSphereFunction fFunction;
+	private IFunction fFunction;
 	private int fNoOfParents;
 	private int fNoOfKids;
 
-	public TJgg(TSphereFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
+	public TJgg(IFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
 		fRandom = rand;
 		fpopulation = initialPopulation;
 		fFunction = function;
