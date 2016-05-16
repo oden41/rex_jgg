@@ -12,22 +12,20 @@ public class REX_JGG_TEST {
 		long noOfEvals = 0; // 評価回数を初期化．
 		long noOfGeneration = 0;
 		double best = jgg.getPopulation().getBestEvaluationValue(); // 集団の最良評価値を取得．
-		jgg.d_Population.writeTo(pw);// 初期集団の情報をログに保存．
+
 		int loopCount = 0; // ループカウンタを初期化する．
 		while (best > 1e-7 && noOfEvals < maxEvals) { // 終了条件．最良値が10^-7以下，もしくは，評価回数が打ち切り評価回数を超えたとき．
+			pw.println(noOfGeneration);
+			jgg.getPopulation().writeTo(pw);// 初期集団の情報をログに保存．
 			loopCount++;
 			jgg.doOneIteration(); // GAの世代を１世代進める．
 			noOfEvals += noOfKids;
 			noOfGeneration++;
-			best = jgg.getPopulation().getBestEvaluationValue(); // 集団内の最良評価値を取得．
-//			if (loopCount % 10 == 0) { // ループカウンタが１０の倍数のときにログをとる．
-//				pw.println(noOfEvals + "," + best);
-//				System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration +  ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
-//			}
-			pw.println(noOfEvals + "," + best);
+			jgg.d_Parents.writeTo(pw);
+			jgg.d_Children.writeTo(pw);
+			best = jgg.getPopulation().getBestEvaluationValue();
 			System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration +  ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
 		}
-		pw.println(noOfEvals + "," + best);// 最終世代のログをとる．
 		System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration +  ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
 	}
 
@@ -40,7 +38,7 @@ public class REX_JGG_TEST {
 		double max = +5.00; // 初期化領域の最大値
 		long maxEvals = (long) (4 * dimension * 1e4); // 打ち切り評価回数
 		String trialName = "RexJggSphereTestLog"; // 試行名
-		String logFilename = trialName + ".csv"; // ログファイル名
+		String logFilename = trialName + ".txt"; // ログファイル名
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(logFilename)));
 
 		TSphereFunction function = new TSphereFunction(dimension);

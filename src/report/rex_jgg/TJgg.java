@@ -12,7 +12,6 @@ public class TJgg {
 	private int fNoOfKids;
 
 	//以下デバッグ用変数
-	public TPopulation d_Population;
 	public TPopulation d_Parents;
 	public TPopulation d_Children;
 
@@ -23,7 +22,6 @@ public class TJgg {
 		fNoOfParents = noOfParents;
 		fNoOfKids = noOfKids;
 
-		d_Population = new TPopulation();
 		d_Parents = new TPopulation();
 		d_Children = new TPopulation();
 
