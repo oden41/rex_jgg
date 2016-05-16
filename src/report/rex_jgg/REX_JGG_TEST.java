@@ -41,7 +41,7 @@ public class REX_JGG_TEST {
 		String logFilename = trialName + ".txt"; // ログファイル名
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(logFilename)));
 
-		TSphereFunction function = new TSphereFunction(dimension);
+		IFunction function = new TSphereFunction(dimension);
 		TPopulation initialPopulation = new TPopulation();
 		Random random = new Random();
 		initialPopulation.setPopulationSize(populationSize);
@@ -52,7 +52,6 @@ public class REX_JGG_TEST {
 			}
 			initialPopulation.getIndividual(i).setEvaluationValue(function.evaluate(initialPopulation.getIndividual(i).getVector()));
 		}
-
 		TJgg jgg = new TJgg(function, initialPopulation, new Random(), noOfParents, noOfKids);
 		executeOneTrial(jgg, pw, maxEvals, dimension, noOfParents, noOfKids);
 

@@ -7,10 +7,11 @@ public class TJgg {
 	private Random fRandom;
 	private TPopulation fpopulation;
 	private TRex fRex;
-	private TSphereFunction fFunction;
+	private IFunction fFunction;
 	private int fNoOfParents;
 	private int fNoOfKids;
 
+	public TJgg(IFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
 	//以下デバッグ用変数
 	public TPopulation d_Parents;
 	public TPopulation d_Children;
