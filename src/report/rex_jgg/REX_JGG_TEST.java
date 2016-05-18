@@ -29,17 +29,17 @@ public class REX_JGG_TEST {
 
 	public static void main(String[] args) throws IOException {
 		int dimension = 20; // 次元数
-		int populationSize = 7 * dimension; // 集団サイズ
+		int populationSize = 14 * dimension; // 集団サイズ
 		int noOfParents = dimension + 1;
-		int noOfKids = 6 * dimension; // 子個体生成数
+		int noOfKids = 5 * dimension; // 子個体生成数
 		double min = -5.00; // 初期化領域の最小値
 		double max = +5.00; // 初期化領域の最大値
 		long maxEvals = (long) (4 * dimension * 1e4); // 打ち切り評価回数
-		String trialName = "RexJggSphereP14K5"; // 試行名
+		String trialName = "RexJggKTabletP14K5"; // 試行名
 		String logFilename = trialName + ".csv"; // ログファイル名
 		PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(logFilename)));
 
-		IFunction function = new TSphereFunction(dimension);
+		IFunction function = new TK_Tablet(dimension);
 		TPopulation initialPopulation = new TPopulation();
 		Random random = new Random();
 		initialPopulation.setPopulationSize(populationSize);
