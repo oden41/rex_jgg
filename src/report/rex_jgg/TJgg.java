@@ -11,12 +11,11 @@ public class TJgg {
 	private int fNoOfParents;
 	private int fNoOfKids;
 
-	public TJgg(IFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
-	//以下デバッグ用変数
+	// 以下デバッグ用変数
 	public TPopulation d_Parents;
 	public TPopulation d_Children;
 
-	public TJgg(TSphereFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
+	public TJgg(IFunction function, TPopulation initialPopulation, Random rand, int noOfParents, int noOfKids) {
 		fRandom = rand;
 		fpopulation = initialPopulation;
 		fFunction = function;
@@ -37,7 +36,6 @@ public class TJgg {
 		for (int i = 0; i < parents.length; i++) {
 			d_Parents.getIndividual(i).copyFrom(parents[i]);
 		}
-
 
 		// 子個体の生成
 		TIndividual[] children = fRex.makeOffspring(parents, fNoOfKids);

@@ -24,9 +24,11 @@ public class REX_JGG_TEST {
 			jgg.d_Parents.writeTo(pw);
 			jgg.d_Children.writeTo(pw);
 			best = jgg.getPopulation().getBestEvaluationValue();
-			System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration +  ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
+			System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration + ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
 		}
-		System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration +  ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
+		pw.println(noOfGeneration);
+		jgg.getPopulation().writeTo(pw);
+		System.out.println("NoOfEvals:" + noOfEvals + "NoOfBeneration:" + noOfGeneration + ", Best:" + best); // 画面に試行数，評価回数，最良評価値を表示．
 	}
 
 	public static void main(String[] args) throws IOException {
