@@ -4,8 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import report.TBaseMethods;
-
 public class TIndividual {
 	private TVector fVector;
 	private double fEvalationValue;
